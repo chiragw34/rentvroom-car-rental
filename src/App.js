@@ -1,25 +1,38 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+// react
+import React, {Fragment} from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+
+import './App.css'
+import "semantic-ui-css/semantic.min.css";
+
+// Components
+import Navbar from './components/layout/Navbar'
+
+// Pages
+import Dashboard from "./pages/Dashboard";
+import CarDetails from "./pages/CarDetails";
+
+import CarListings from './pages/CarListings'
+// redux
+import { Provider } from "react-redux";
+import store from "./redux/store";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Fragment>
+      <Provider store={store}>
+        <Router>
+          <Navbar />
+          <div className="container">
+            <Switch>
+              <Route exact path="/" component={Dashboard} />
+              <Route exact path="/car-listings" component={CarListings} />
+              <Route exact path="/car-details/:id" component={CarDetails} />
+            </Switch>
+          </div>
+        </Router>
+      </Provider>
+    </Fragment>
   );
 }
 

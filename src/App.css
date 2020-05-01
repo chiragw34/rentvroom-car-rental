@@ -1,38 +1,92 @@
-.App {
-  text-align: center;
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+p,
+a {
+  font-family: "Nunito", "Helvetica Neue", Arial, Helvetica, sans-serif !important;
+}
+/* Nav Bar */
+.header {
+  width: 100%;
+  max-width: 1600px;
+  /* background-color: aqua; */
+  margin: 0px auto 0px auto;
+}
+.ui.secondary.menu {
+  margin-bottom: 0 !important;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.divider {
+  margin: 0 auto 25px auto !important;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+.logo {
+  font-size: 30px;
+  font-weight: bolder !important;
+}
+
+.right-menu {
+  margin-right: 3% !important;
+}
+
+/* Body */
+.container {
+  width: 90%;
+  max-width: 1600px;
+  margin: 0px auto 50px auto;
+}
+
+/* Car Card */
+.car-card {
+  margin: 0px auto 10px auto !important;
+}
+
+.book-btn {
+  margin-top: 10px;
+}
+
+@media (max-width: 500px) {
+  .car-card {
+    width: 95% !important;
+  }
+  .car-img > img {
+  height: 20px !important;
+  object-fit: cover;
+}
+}
+
+@media (min-width: 1300px) {
+  .book-btn {
+    width: 60%;
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+.all-cars-list {
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.car-img > img {
+  height: 150px !important;
+  object-fit: cover;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Car details */
+.full-car-img {
+  width: 100%;
+}
+
+.car-name {
+  font-size: 3rem;
+}
+
+/* Modal */
+.modal-action-btn{
+  margin-left: 10px !important;
+}
+.modal-action-btn-grp{
+  float: right;
+  margin-bottom: 20px !important;
 }

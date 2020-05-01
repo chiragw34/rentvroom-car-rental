@@ -1,0 +1,7 @@
+export const SET_BOOKING = 'SET_BOOKING'
+
+export const SET_DASHBOARD = "SET_DASHBOARD";
+export const SET_CAR_LISTINGS = "SET_CAR_LISTINGS";
+
+export const OPEN_DIALOG = "OPEN_DIALOG"
+export const CLOSE_DIALOG = "CLOSE_DIALOG"

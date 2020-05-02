@@ -2,16 +2,15 @@
 import React, {Fragment} from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
+// CSS
 import './App.css'
 import "semantic-ui-css/semantic.min.css";
 
 // Components
-import Navbar from './components/layout/Navbar'
 
 // Pages
-import Dashboard from "./pages/Dashboard";
 import CarDetails from "./pages/CarDetails";
-
+import BookNow from './pages/BookNow'
 import CarListings from './pages/CarListings'
 // redux
 import { Provider } from "react-redux";
@@ -22,14 +21,14 @@ function App() {
     <Fragment>
       <Provider store={store}>
         <Router>
-          <Navbar />
-          <div className="container">
-            <Switch>
-              <Route exact path="/" component={Dashboard} />
-              <Route exact path="/car-listings" component={CarListings} />
+          <Switch>
+            <div className="container">
+              <Route exact path="/" component={CarListings} />
+              <Route exact path="/dashboard" component={CarListings} />
               <Route exact path="/car-details/:id" component={CarDetails} />
-            </Switch>
-          </div>
+              <Route exact path="/book-now" component={BookNow} />
+            </div>
+          </Switch>
         </Router>
       </Provider>
     </Fragment>

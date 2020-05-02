@@ -4,7 +4,6 @@ h2,
 h3,
 h4,
 h5,
-p,
 a {
   font-family: "Nunito", "Helvetica Neue", Arial, Helvetica, sans-serif !important;
 }
@@ -14,6 +13,18 @@ a {
   max-width: 1600px;
   /* background-color: aqua; */
   margin: 0px auto 0px auto;
+}
+.header-logo {
+  width: 25% !important;
+  max-width: 350px !important;
+  margin: 23px auto 100px auto;
+}
+
+@media (max-width: 768px) {
+  .header-logo {
+    width: 60% !important;
+    max-width: 500px !important;
+  }
 }
 .ui.secondary.menu {
   margin-bottom: 0 !important;
@@ -33,19 +44,79 @@ a {
 }
 
 /* Body */
-.container {
-  width: 90%;
-  max-width: 1600px;
-  margin: 0px auto 50px auto;
+
+.car-details-container,
+.car-listings-container {
+  width: 90% !important;
+  margin: 0px auto 20px auto;
+}
+.book-now-container {
+  width: 100%;
+  max-width: 1600px !important;
+  margin: 0px auto 20px auto;
 }
 
 /* Car Card */
+
+.details-heading{
+  margin-left: 10px;
+}
+.rent-heading{
+  margin: 0 auto;
+}
 .car-card {
-  margin: 0px auto 10px auto !important;
+  margin: 10px auto 40px auto !important;
+  width: 90% !important;
+  max-width: 1200px !important;
+  height: 120px;
+}
+
+.card-car-img {
+  height: 120px;
+  object-fit: cover;
+}
+
+.card-name {
+  margin: auto 0px auto 15px;
+}
+
+.card-car-name {
+  font-size: 1.5rem;
+}
+
+.card-car-color {
+  float: left;
+}
+
+.card-car-seats {
+  float: right;
+}
+
+.card-car-rent {
+  margin: auto 0px auto 10px;
+  text-align: center;
+}
+
+.card-car-book {
+  margin: auto 0px auto 10px !important;
+  text-align: center;
+}
+
+.card-car-details {
+  margin: auto 0px auto 10px !important;
+  text-align: center;
 }
 
 .book-btn {
-  margin-top: 10px;
+  margin: 0 auto 0 auto !important;
+  background-color: #555 !important;
+  border-radius: 2px !important;
+}
+
+.details-btn {
+  color: #555 !important;
+  background-color: #ddd !important;
+  border-radius: 2px !important;
 }
 
 @media (max-width: 500px) {
@@ -53,9 +124,9 @@ a {
     width: 95% !important;
   }
   .car-img > img {
-  height: 20px !important;
-  object-fit: cover;
-}
+    height: 20px !important;
+    object-fit: cover;
+  }
 }
 
 @media (min-width: 1300px) {
@@ -74,19 +145,142 @@ a {
 }
 
 /* Car details */
+.car-details-body {
+  width: 90%;
+  margin: 0 auto;
+}
+
+.car-details-card {
+  width: 100% !important;
+  margin-bottom: 6% !important;
+}
+
 .full-car-img {
   width: 100%;
+  max-height: 250px;
+  object-fit: cover;
+}
+
+.right-side-details {
+  margin: auto 0 auto 10px;
 }
 
 .car-name {
   font-size: 3rem;
 }
 
-/* Modal */
-.modal-action-btn{
-  margin-left: 10px !important;
+.sub-details-1 {
+  color: #666;
+  margin-top: 5% !important;
 }
-.modal-action-btn-grp{
+.car-seats {
+  margin-left: 40px;
+}
+
+.sub-details-2 {
+  margin-top: 10%;
+  font-size: medium;
+}
+.car-rent {
+  font-size: 1.5rem;
+}
+
+.sub-details-3 {
+  margin-top: 5%;
+}
+
+.na-label {
+  margin-bottom: 15px !important;
+}
+
+.current-bookings{
+  margin-top: 50px;
+}
+
+.headings{
+  color:#555
+}
+
+/* footer */
+.footer {
+  margin-top: 150px;
+}
+
+.social-media-icons {
+  margin-top: 35px;
+}
+
+.social-media-icon {
+  margin-right: 50px;
+}
+
+.bottom-menu {
+  margin-top: 30px !important;
+}
+
+.left-menu {
+  margin: auto 20px auto 0px !important;
+  padding-left: 0 !important;
+}
+
+.right-menu {
+  font-size: smaller;
+  text-align: right !important;
+  margin-right: 0 !important;
+}
+
+/* Booking Details */
+.book-details {
+  background-image: url("./images/book-now-bg.jpg");
+  background-repeat: no-repeat;
+  padding: 15% 2% 3% 40% !important;
+}
+
+.side-logo {
+  width: 30%;
+  max-height: 100px !important;
+  margin: 0px 0px auto 30%;
+  float: right !important;
+  object-fit: cover;
+  position: absolute !important;
+  max-width: 300px !important;
+  
+}
+
+.form {
+  margin-top: 100px !important;
+}
+
+.action-btns {
+  margin-top: 8%;
+  padding-right: 3%;
+}
+.submit-btn {
   float: right;
-  margin-bottom: 20px !important;
+  margin: 0 auto 0 auto !important;
+  background-color: #555 !important;
+  border-radius: 2px !important;
+  color: white !important;
+}
+
+.cancel-btn {
+  background-color: white !important;
+}
+
+/* Confirm Modal */
+.confirm-modal{
+  background-image: url('./images/confirm-bg.jpg') !important;
+  background-size: contain !important;
+  background-repeat: no-repeat !important;
+  padding: auto 0 auto 0;
+}
+
+.modal-body{
+  margin:8% 1% 8% 40%;
+}
+
+.continue-modal-btn{
+  background-color: white !important;
+  color: #666 !important;
+  float: right;
 }

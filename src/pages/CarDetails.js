@@ -1,66 +1,152 @@
 import React, { Component } from "react";
-import { Grid, Image, Loader, Dimmer, Button } from "semantic-ui-react";
+import {
+  Card,
+  Grid,
+  Image,
+  Loader,
+  Label,
+  Dimmer,
+  Button,
+  Divider,
+} from "semantic-ui-react";
+import { Link } from "react-router-dom";
 
-import DummyData from "../utils/DummyCarData.json";
+// Components
+import Navbar from "../components/layout/Navbar";
+import Footer from "../components/layout/Footer";
+import CurrentBookings from "../components/pages/CurrentBooking";
+
+// Icons
+import { MdAirlineSeatReclineNormal, MdClose } from "react-icons/md";
+import { FaRupeeSign, FaEyeDropper } from "react-icons/fa";
+
+// Redux
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { setSelectedCar } from "../redux/actions/dataActions";
 
 class CarDetails extends Component {
-  state = {
-    carData: {},
-    loading: true,
+  constructor() {
+    super();
+    this.state = {
+      carData: {},
+      loading: true,
+      booked: false,
+    };
+  }
+
+  handleOnClick = (event) => {
+    this.props.setSelectedCar(this.props.carData);
   };
   componentDidMount() {
-    const pathname = window.location.pathname;
-    const carId = pathname.substring(13, pathname.length);
+    var data;
+    var userData = JSON.parse(localStorage.getItem("userData"));
 
-    this.setState({
-      carData: DummyData.find((id) => id.id === carId),
-      loading: false,
-    });
+    if (Object.keys(this.props.data.selectedCar).length !== 0) {
+      data = this.props.data.selectedCar;
+    } else {
+      data = JSON.parse(localStorage.getItem("selectedCar"));
+    }
+
+    if (userData !== null && userData.selectedCar.id === data.id) {
+      // already booked
+      this.setState({
+        booked: true,
+      });
+    }
+
+    if (data) {
+      this.setState({
+        carData: data,
+        loading: false,
+      });
+    }
   }
 
   render() {
+    const carData = this.state.carData;
+
     const carDetails = this.state.loading ? (
       <Dimmer active inverted>
         <Loader inverted>Loading</Loader>
       </Dimmer>
     ) : (
-      <div>
-        <Grid columns={2}>
-          <Grid.Row>
-            <Grid.Column mobile={16} tablet={8} computer={8}>
-              <Image className="full-car-img" src={this.state.carData.image} />
+      <div className="car-details-body">
+        <Card className="car-details-card">
+          <Grid>
+            <Grid.Column width={9}>
+              <Image src={carData.image} className="full-car-img" />
             </Grid.Column>
-            <Grid.Column mobile={16} tablet={8} computer={8}>
-              <h1 className="car-name">{this.state.carData.name}</h1>
-              <h3>Model: {this.state.carData.model}</h3>
-              <p>
-                <strong>Description: </strong>
-                {this.state.carData.description}
-              </p>
+            <Grid.Column width={6} className="right-side-details">
+              <h1>{carData.name}</h1>
+              <div>
+                <p className="sub-details-1">
+                  <FaEyeDropper /> White
+                  <MdAirlineSeatReclineNormal className="car-seats" />{" "}
+                  {carData.capacity} seats
+                </p>
+                <p className="sub-details-2">
+                  Rent per day:
+                  <span className="car-rent">
+                    <FaRupeeSign fontSize={18} />
+                    {carData.rent}
+                  </span>
+                </p>
+              </div>
+              <div className="sub-details-3">
+                <Button
+                  primary
+                  className="book-btn"
+                  disabled={!carData.available}
+                  onClick={this.handleOnClick}
+                  as={Link}
+                  to="/book-now"
+                >
+                  Book Now
+                </Button>
+                {!carData.available && (
+                  <span style={{ color: "red", marginLeft: "10px" }}>
+                    Currently unavailable
+                  </span>
+                )}
+              </div>
             </Grid.Column>
-          </Grid.Row>
-          <Grid.Row>
-            <Grid.Column>
-              <strong>Available for booking: </strong>
-              {this.state.carData.available ? "yes" : "no"}
-            </Grid.Column>
-          </Grid.Row>
-          <Grid.Row>
-            <Grid.Column>
-              <Button
-                primary
-                className="book-btn"
-                disabled={!this.state.carData.available}
-              >
-                Book Car
-              </Button>
-            </Grid.Column>
-          </Grid.Row>
-        </Grid>
+          </Grid>
+        </Card>
+        <h2 style={{ color: "#555" }}>Car Details</h2>
+        <Divider />
+        {!carData.available && (
+          <Label className="na-label">
+            Not Available <MdClose />{" "}
+          </Label>
+        )}
+        <p>Vehicle Number: {carData.vehicle_no}</p>
+        <p>{carData.description}</p>
+        {this.state.booked && <CurrentBookings />}
       </div>
     );
-    return carDetails;
+    return (
+      <div className="car-details-container">
+        <Navbar />
+        {carDetails}
+
+        <Footer />
+      </div>
+    );
   }
 }
 
-export default CarDetails;
+CarDetails.propTypes = {
+  data: PropTypes.object.isRequired,
+  setSelectedCar: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  data: state.data,
+});
+
+const mapActionToProps = {
+  setSelectedCar,
+};
+
+export default connect(mapStateToProps, mapActionToProps)(CarDetails);

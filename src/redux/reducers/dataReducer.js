@@ -1,26 +1,22 @@
-import {
-  OPEN_DIALOG,
-  CLOSE_DIALOG,
-} from "../types";
+import { SET_CAR_DATA, SET_USER_DATA } from "../types";
 
 const initialState = {
-  dialogOpen: false,
+  selectedCar: {},
+  userData: {},
 };
 
 export default function (state = initialState, action) {
   switch (action.type) {
-  
-    case OPEN_DIALOG:
-      console.log(state);
-      
+    case SET_CAR_DATA:
       return {
         ...state,
-        dialogOpen: true,
+        selectedCar: action.payload,
       };
-    case CLOSE_DIALOG:
+
+    case SET_USER_DATA:
       return {
         ...state,
-        dialogOpen: false,
+        userData: action.payload,
       };
     default:
       return state;

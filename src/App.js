@@ -25,7 +25,7 @@ function App() {
             <div className="container">
               <Route exact path="/" component={CarListings} />
               <Route exact path="/dashboard" component={CarListings} />
-              <Route exact path="/car-details/:id" component={CarDetails} />
+              <Route exact path="/car-details" component={CarDetails} />
               <Route exact path="/book-now" component={BookNow} />
             </div>
           </Switch>

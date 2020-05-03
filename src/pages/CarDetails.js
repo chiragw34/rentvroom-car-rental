@@ -35,32 +35,26 @@ class CarDetails extends Component {
     };
   }
 
-  handleOnClick = (event) => {
-    this.props.setSelectedCar(this.props.carData);
-  };
   componentDidMount() {
     var data;
-    var userData = JSON.parse(localStorage.getItem("userData"));
+    var selectedCar = JSON.parse(localStorage.getItem("selectedCar"));
 
-    if (Object.keys(this.props.data.selectedCar).length !== 0) {
+    if (selectedCar === null) {
       data = this.props.data.selectedCar;
     } else {
       data = JSON.parse(localStorage.getItem("selectedCar"));
     }
 
-    if (userData !== null && userData.selectedCar.id === data.id) {
-      // already booked
+    if (localStorage.getItem(selectedCar.id) !== null) {
       this.setState({
         booked: true,
       });
+      console.log(this.state.carData);
     }
-
-    if (data) {
-      this.setState({
-        carData: data,
-        loading: false,
-      });
-    }
+    this.setState({
+      carData: data,
+      loading: false,
+    });
   }
 
   render() {
@@ -74,14 +68,20 @@ class CarDetails extends Component {
       <div className="car-details-body">
         <Card className="car-details-card">
           <Grid>
-            <Grid.Column width={9}>
+            <Grid.Column mobile={16} tablet={8} computer={9}>
               <Image src={carData.image} className="full-car-img" />
             </Grid.Column>
-            <Grid.Column width={6} className="right-side-details">
+            <Grid.Column
+              width={6}
+              mobile={16}
+              tablet={7}
+              computer={6}
+              className="right-side-details"
+            >
               <h1>{carData.name}</h1>
               <div>
                 <p className="sub-details-1">
-                  <FaEyeDropper /> White
+                  <FaEyeDropper /> {carData.color}
                   <MdAirlineSeatReclineNormal className="car-seats" />{" "}
                   {carData.capacity} seats
                 </p>
@@ -98,14 +98,20 @@ class CarDetails extends Component {
                   primary
                   className="book-btn"
                   disabled={!carData.available}
-                  onClick={this.handleOnClick}
                   as={Link}
                   to="/book-now"
                 >
                   Book Now
                 </Button>
                 {!carData.available && (
-                  <span style={{ color: "red", marginLeft: "10px" }}>
+                  <span
+                    style={{
+                      color: "red",
+                      marginLeft: "10px",
+                      marginBottom: "0px",
+                      marginTop: "auto",
+                    }}
+                  >
                     Currently unavailable
                   </span>
                 )}
@@ -122,7 +128,7 @@ class CarDetails extends Component {
         )}
         <p>Vehicle Number: {carData.vehicle_no}</p>
         <p>{carData.description}</p>
-        {this.state.booked && <CurrentBookings />}
+        {this.state.booked && <CurrentBookings id={carData.id} />}
       </div>
     );
     return (

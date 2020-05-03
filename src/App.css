@@ -48,6 +48,8 @@ a {
 .car-details-container,
 .car-listings-container {
   width: 90% !important;
+ 
+  max-width: 1200px !important;
   margin: 0px auto 20px auto;
 }
 .book-now-container {
@@ -73,6 +75,7 @@ a {
 
 .card-car-img {
   height: 120px;
+  margin:0 auto;
   object-fit: cover;
 }
 
@@ -153,6 +156,7 @@ a {
 .car-details-card {
   width: 100% !important;
   margin-bottom: 6% !important;
+  padding :2% !important;
 }
 
 .full-car-img {
@@ -191,6 +195,8 @@ a {
 
 .na-label {
   margin-bottom: 15px !important;
+  color:white !important;
+  background-color: #777 !important;
 }
 
 .current-bookings{
@@ -199,6 +205,11 @@ a {
 
 .headings{
   color:#555
+}
+
+.mobile-bookings{
+  visibility: hidden;
+  height: 0;
 }
 
 /* footer */
@@ -233,6 +244,7 @@ a {
 .book-details {
   background-image: url("./images/book-now-bg.jpg");
   background-repeat: no-repeat;
+  background-size: auto;
   padding: 15% 2% 3% 40% !important;
 }
 
@@ -283,4 +295,48 @@ a {
   background-color: white !important;
   color: #666 !important;
   float: right;
+}
+
+/* mobile responsiveness */
+@media (max-width:768px){
+  .car-card{
+    height: auto;
+    padding: 5% !important;
+  }
+  .car-card-name{
+     margin: auto 15px auto 15px !important;
+     padding: 5px;
+  }
+  .card-car-rent{
+    text-align: right;
+    font-size: larger;
+  }
+  .card-car-details{
+    margin-top: 0 !important;
+  }
+  
+  .list-headings{
+    visibility: hidden !important;
+    height: 0;
+  }
+  .car-details-card{
+    padding:5% !important;
+  }
+
+  .book-details{
+    padding: 10% 8% !important;
+    background: none;
+  }
+  .side-logo{
+    right: 3%;
+    margin:10px 0 !important;
+    width: 30% !important;
+  }
+  .computer-tablet-bookings{
+    visibility:  hidden;
+    height: 20px;
+  }
+  .mobile-bookings{
+  visibility: unset;
+}
 }

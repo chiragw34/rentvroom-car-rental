@@ -20,18 +20,27 @@ class CarCard extends Component {
     this.props.closeUserForm();
   };
   handleOnClick = (event) => {
-    this.props.setSelectedCar(this.props.carData);  
+    this.props.setSelectedCar(this.props.carData);
   };
   render() {
     var { carData } = this.props;
+    if (JSON.parse(localStorage.getItem(carData.id) !== null)) {
+      carData.available = false;
+    }
 
     return (
       <Card className="car-card">
         <Grid>
-          <Grid.Column width={4}>
+          <Grid.Column width={4} mobile={16} tablet={3} computer={4}>
             <Image src={carData.image} className="card-car-img" />
           </Grid.Column>
-          <Grid.Column width={4} className="card-name">
+          <Grid.Column
+            width={4}
+            mobile={9}
+            tablet={5}
+            computer={4}
+            className="card-name"
+          >
             <h4 className="card-car-name">{carData.name}</h4>
             <Grid.Row>
               <div className="card-car-color">
@@ -44,18 +53,30 @@ class CarCard extends Component {
               </div>
             </Grid.Row>
           </Grid.Column>
-          <Grid.Column width={2} className="card-car-rent">
+          <Grid.Column
+            width={2}
+            mobile={5}
+            tablet={2}
+            computer={2}
+            className="card-car-rent"
+          >
             <FaRupeeSign color="#666" />
             {carData.rent}
           </Grid.Column>
-          <Grid.Column width={3} className="card-car-book">
+          <Grid.Column
+            width={3}
+            mobile={8}
+            tablet={2}
+            computer={3}
+            className="card-car-book"
+          >
             <Button
               primary
               className="book-btn"
               disabled={!carData.available}
               onClick={this.handleOnClick}
               as={Link}
-              to='/book-now'
+              to="/book-now"
             >
               Book Car
             </Button>
@@ -65,13 +86,19 @@ class CarCard extends Component {
               </p>
             )}
           </Grid.Column>
-          <Grid.Column width={2} className="card-car-details">
+          <Grid.Column
+            width={2}
+            mobile={5}
+            tablet={1}
+            computer={2}
+            className="card-car-details"
+          >
             <div>
               <Button
                 className="details-btn"
                 onClick={this.handleOnClick}
                 as={Link}
-                to={`/car-details/${carData.id}`}
+                to="/car-details"
               >
                 Details
               </Button>

@@ -9,18 +9,19 @@ import Footer from "../components/layout/Footer";
 class CarListings extends Component {
   state = {
     data: [],
+    loading:true
   };
 
   componentDidMount() {
-    localStorage.removeItem('selectedCar')
     this.setState({
       data: [...dummyData],
+      loading:false
     });
   }
 
   render() {
     const data = this.state.data;
-    const loading = false;
+    const loading = this.state.loading;
 
     return (
       <div className="car-listings-container">
@@ -30,11 +31,11 @@ class CarListings extends Component {
           <Divider />
           {loading ? (
             <Loader active inline="centered" size="big">
-              Fetching cars...
+              Fetching cars for rentals...
             </Loader>
           ) : (
             <div>
-              <Grid style={{width:'90%', margin:'0 auto', maxWidth:'1200px'}}>
+              <Grid className='list-headings' style={{width:'90%', margin:'0 auto', maxWidth:'1200px'}}>
                 <Grid.Column width={4} />
                 <Grid.Column width={4} className="details-heading">
                   <h5>Car Details</h5>

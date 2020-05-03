@@ -93,6 +93,7 @@ class BookNow extends Component {
         dReturn: this.state.dReturn,
         selectedCar: data,
       };
+      localStorage.setItem(userData.selectedCar.id, JSON.stringify(userData));
       this.props.setUserData(userData);
       this.setState({ visible: true });
     }
@@ -105,8 +106,6 @@ class BookNow extends Component {
   };
 
   render() {
-    console.log(this.props);
-
     return (
       <div className="book-now-container">
         <ConfirmModal visible={this.state.visible} />
@@ -117,7 +116,7 @@ class BookNow extends Component {
           </Grid>
           <Form onSubmit={this.handleSubmit}>
             <Grid columns={2} className="form">
-              <Grid.Column>
+              <Grid.Column mobile={16} tablet={8} computer={6}>
                 <Form.Field
                   label="Name"
                   type="text"
@@ -132,7 +131,7 @@ class BookNow extends Component {
                   }
                 />
               </Grid.Column>
-              <Grid.Column>
+              <Grid.Column mobile={16} tablet={9} computer={6}>
                 <Form.Field
                   label="Phone Number"
                   type="phone"
@@ -147,7 +146,7 @@ class BookNow extends Component {
                   }
                 />
               </Grid.Column>
-              <Grid.Column>
+              <Grid.Column mobile={16} tablet={9} computer={6}>
                 <Form.Input
                   label="Date of issue"
                   error={
@@ -163,7 +162,7 @@ class BookNow extends Component {
                   />
                 </Form.Input>
               </Grid.Column>
-              <Grid.Column>
+              <Grid.Column mobile={16} tablet={9} computer={6}>
                 <Form.Input
                   label="Date of return"
                   error={

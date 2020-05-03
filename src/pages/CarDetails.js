@@ -26,14 +26,11 @@ import { connect } from "react-redux";
 import { setSelectedCar } from "../redux/actions/dataActions";
 
 class CarDetails extends Component {
-  constructor() {
-    super();
-    this.state = {
-      carData: {},
-      loading: true,
-      booked: false,
-    };
-  }
+  state = {
+    carData: {},
+    loading: true,
+    booked: false,
+  };
 
   componentDidMount() {
     var data;
@@ -72,7 +69,6 @@ class CarDetails extends Component {
               <Image src={carData.image} className="full-car-img" />
             </Grid.Column>
             <Grid.Column
-              width={6}
               mobile={16}
               tablet={7}
               computer={6}

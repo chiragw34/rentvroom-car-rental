@@ -6,7 +6,6 @@ import {
   Form,
   Button,
   Label,
-  Modal,
 } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import Datepicker from "react-datepicker";

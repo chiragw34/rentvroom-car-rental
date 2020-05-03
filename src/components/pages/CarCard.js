@@ -8,7 +8,6 @@ import { FaRupeeSign, FaEyeDropper } from "react-icons/fa";
 
 // Redux
 import { connect } from "react-redux";
-import { closeUserForm, openUserForm } from "../../redux/actions/uiActions";
 import { setSelectedCar } from "../../redux/actions/dataActions";
 
 class CarCard extends Component {
@@ -31,11 +30,11 @@ class CarCard extends Component {
     return (
       <Card className="car-card">
         <Grid>
-          <Grid.Column width={4} mobile={16} tablet={3} computer={4}>
+          <Grid.Column mobile={16} tablet={3} computer={4}>
             <Image src={carData.image} className="card-car-img" />
           </Grid.Column>
           <Grid.Column
-            width={4}
+           
             mobile={9}
             tablet={5}
             computer={4}
@@ -54,7 +53,7 @@ class CarCard extends Component {
             </Grid.Row>
           </Grid.Column>
           <Grid.Column
-            width={2}
+           
             mobile={5}
             tablet={2}
             computer={2}
@@ -64,7 +63,7 @@ class CarCard extends Component {
             {carData.rent}
           </Grid.Column>
           <Grid.Column
-            width={3}
+           
             mobile={8}
             tablet={2}
             computer={3}
@@ -87,7 +86,7 @@ class CarCard extends Component {
             )}
           </Grid.Column>
           <Grid.Column
-            width={2}
+           
             mobile={5}
             tablet={1}
             computer={2}
@@ -111,20 +110,14 @@ class CarCard extends Component {
 }
 
 CarCard.propTypes = {
-  openUserForm: PropTypes.func.isRequired,
-  closeUserForm: PropTypes.func.isRequired,
-  UI: PropTypes.object.isRequired,
   setSelectedCar: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  dialogOpen: state.UI.dialogOpen,
   data: state.data,
 });
 
 const mapActionToProps = {
-  openUserForm,
-  closeUserForm,
   setSelectedCar,
 };
 

@@ -47,7 +47,7 @@ class CarListings extends Component {
               </Grid>
               <Transition.Group>
                 {data.length !== 0 &&
-                  data.map((car) => <CarCard carData={car} />)}
+                  data.map((car) => <CarCard carData={car} key={car.id} />)}
               </Transition.Group>
             </div>
           )}

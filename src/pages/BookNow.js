@@ -157,6 +157,7 @@ class BookNow extends Component {
                   <Datepicker
                     placeholderText="mm/dd/yyyy"
                     selected={this.state.dIssue}
+                    minDate={new Date()}
                     onChange={(date) => this.setState({ dIssue: date })}
                   />
                 </Form.Input>
@@ -173,6 +174,7 @@ class BookNow extends Component {
                   <Datepicker
                     placeholderText="mm/dd/yyyy"
                     selected={this.state.dReturn}
+                    minDate={new Date()}
                     onChange={(date) => this.setState({ dReturn: date })}
                   />
                 </Form.Input>

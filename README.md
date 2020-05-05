@@ -8,4 +8,4 @@ You will also see any lint errors in the console.
 
 ### Guide
 Since the app is frontend only, data is not synced across devices.<br />
-A json file is used as dummy data located in 'utils/DummyCarData.json' 
+A json file is used as dummy data located in 'src/utils/DummyCarData.json' 

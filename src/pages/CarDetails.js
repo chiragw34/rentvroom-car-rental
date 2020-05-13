@@ -10,7 +10,7 @@ import {
   Divider,
 } from "semantic-ui-react";
 import { Link } from "react-router-dom";
-import axios from 'axios'
+import axios from "axios";
 
 // Components
 import Navbar from "../components/layout/Navbar";
@@ -35,24 +35,21 @@ class CarDetails extends Component {
 
   componentDidMount() {
     const carId = this.props.match.params.carId;
-    axios.get(`/cars/${carId}`).then(res => {
+    axios.get(`/cars/${carId}`).then((res) => {
       // console.log(res.data.car);
       this.setState({
         carData: res.data.car,
         loading: false,
       });
-    })
+    });
 
-    
     var selectedCar = JSON.parse(localStorage.getItem("selectedCar"));
 
     if (localStorage.getItem(selectedCar.id) !== null) {
       this.setState({
         booked: true,
       });
-      
     }
- 
   }
 
   render() {
@@ -91,12 +88,12 @@ class CarDetails extends Component {
                 </p>
               </div>
               <div className="sub-details-3">
-                  <Button
-                    primary
-                    className="book-btn"
-                    disabled={!carData.available}
-                    as={Link}
-                    to={`/book-now/${carData._id}`}
+                <Button
+                  primary
+                  className="book-btn"
+                  disabled={!carData.available}
+                  as={Link}
+                  to={`/book-now/${carData._id}`}
                 >
                   Book Now
                 </Button>
@@ -125,7 +122,9 @@ class CarDetails extends Component {
         )}
         <p>Vehicle Number: {carData.vehicle_no}</p>
         <p>{carData.description}</p>
-        {carData.current_booking && <CurrentBookings data={carData.current_booking} id={carData._id} />}
+        {carData.current_booking && (
+          <CurrentBookings data={carData.current_booking} id={carData._id} />
+        )}
       </div>
     );
     return (

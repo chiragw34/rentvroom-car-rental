@@ -338,5 +338,6 @@ a {
   }
   .mobile-bookings{
   visibility: unset;
+  padding-bottom: 40px;
 }
 }

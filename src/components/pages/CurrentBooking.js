@@ -1,24 +1,30 @@
 import React, { Component } from "react";
 import { Divider, Grid, Loader,Dimmer,Button } from "semantic-ui-react";
 import dateFormat from "dateformat";
-import { MdCancel } from 'react-icons/md'
 import axios from 'axios'
 
 class CurrentBooking extends Component {
   state = {
     userData: null,
-    loading: true
+    loading: true,
+    disabled:true
   }
   
   componentDidMount() {
     // console.log(this.props.data);
-    
+    if (localStorage.getItem(this.props.id)) {
+      console.log("true");
+      this.setState({
+        disabled:false
+      })
+    }
     this.setState({
       userData:this.props.data
     })
   }
   cancelBooking = event => {
     axios.delete(`/book/${this.props.id}/cancel`).then(() => {
+      localStorage.removeItem(this.props.id)
       window.location.reload(false);
     })
   }
@@ -51,8 +57,16 @@ class CurrentBooking extends Component {
                 {dateFormat(userData.dReturn, "d mmm 'yy")}
               </Grid.Column>
               <Grid.Column width={2}>
-                <Button onClick={this.cancelBooking} style={{padding:0, borderRadius:100}}>
-                  <MdCancel color="red" style={{height:"100%"}} />
+                <Button
+                  disabled={this.state.disabled}
+                  onClick={this.cancelBooking}
+                  style={{
+                    backgroundColor: "#cd5c5c",
+                    color: "white",
+                    padding: "10%",
+                  }}
+                >
+                  Cancel
                 </Button>
               </Grid.Column>
             </Grid.Row>
@@ -62,6 +76,16 @@ class CurrentBooking extends Component {
             <p>Phone Number : {userData.phone}</p>
             <p>Issue Date : {dateFormat(userData.dIssue, "d mmm 'yy")}</p>
             <p>Return Date : {dateFormat(userData.dReturn, "d mmm 'yy")}</p>
+            <Button
+              onClick={this.cancelBooking}
+              disabled={this.state.disabled}
+              style={{
+                backgroundColor: "#cd5c5c",
+                color: "white",
+              }}
+            >
+              Cancel
+            </Button>
           </div>
         </div>
       );

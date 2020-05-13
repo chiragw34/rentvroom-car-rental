@@ -27,6 +27,7 @@ class BookNow extends Component {
       dReturn: null,
     },
     visible: false,
+    carName: null,
   };
 
   validateForm() {
@@ -86,7 +87,13 @@ class BookNow extends Component {
       axios.post(`/book/${carId}`, userData).then((res) => {
         // console.log(res);
         if (res.data.success) {
-          this.setState({ visible: true });
+          axios.get(`/cars/${carId}`).then((res) => {
+            localStorage.setItem(carId,"true")
+            this.setState({
+              carName: res.data.car.name,
+              visible: true,
+            });
+          });
         }
       });
     }
@@ -103,7 +110,7 @@ class BookNow extends Component {
       <div className="book-now-container">
         <ConfirmModal
           visible={this.state.visible}
-          name={this.state.name}
+          name={this.state.carName}
           dIssue={this.state.dIssue}
           dReturn={this.state.dReturn}
         />
@@ -154,7 +161,8 @@ class BookNow extends Component {
                   }
                 >
                   <Datepicker
-                    placeholderText="mm/dd/yyyy"
+                    dateFormat="dd/MM/yyyy"
+                    placeholderText="dd/mm/yyyy"
                     selected={this.state.dIssue}
                     minDate={new Date()}
                     onChange={(date) => this.setState({ dIssue: date })}
@@ -171,7 +179,8 @@ class BookNow extends Component {
                   }
                 >
                   <Datepicker
-                    placeholderText="mm/dd/yyyy"
+                    dateFormat="dd/MM/yyyy"
+                    placeholderText="dd/mm/yyyy"
                     selected={this.state.dReturn}
                     minDate={new Date()}
                     onChange={(date) => this.setState({ dReturn: date })}

@@ -1,19 +1,15 @@
 import React, { Component } from "react";
-import {
-  Grid,
-  Image,
-  Input,
-  Form,
-  Button,
-  Label,
-} from "semantic-ui-react";
+import { Grid, Image, Input, Form, Button, Label } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import Datepicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import axios from "axios";
 
+// Components
 import ConfirmModal from "../components/pages/ConfirmModal";
 
 import logo from "../images/logo.png";
-import "react-datepicker/dist/react-datepicker.css";
+
 // Redux
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
@@ -34,7 +30,7 @@ class BookNow extends Component {
   };
 
   validateForm() {
-    console.log("validating form");
+    // console.log("validating form");
     const errors = this.state.errors;
 
     // name
@@ -66,7 +62,7 @@ class BookNow extends Component {
     } else errors.dReturn = false;
 
     this.setState({ errors });
-    console.log("state : ", this.state, errors);
+    // console.log("state : ", this.state, errors);
   }
 
   handleSubmit = (event) => {
@@ -76,13 +72,7 @@ class BookNow extends Component {
     const errors = this.state.errors;
 
     if (!errors.name && !errors.phone && !errors.dIssue && !errors.dReturn) {
-      console.log("submit success full");
-      var data = {};
-      if (Object.keys(this.props.data.selectedCar).length !== 0) {
-        data = this.props.data.selectedCar;
-      } else {
-        data = JSON.parse(localStorage.getItem("selectedCar"));
-      }
+      // console.log("submit success full");
 
       // no errors
       const userData = {
@@ -90,11 +80,15 @@ class BookNow extends Component {
         phone: this.state.phone,
         dIssue: this.state.dIssue,
         dReturn: this.state.dReturn,
-        selectedCar: data,
       };
-      localStorage.setItem(userData.selectedCar.id, JSON.stringify(userData));
-      this.props.setUserData(userData);
-      this.setState({ visible: true });
+      // console.log(this.props.match.params.carId);
+      const carId = this.props.match.params.carId;
+      axios.post(`/book/${carId}`, userData).then((res) => {
+        // console.log(res);
+        if (res.data.success) {
+          this.setState({ visible: true });
+        }
+      });
     }
   };
 
@@ -107,7 +101,12 @@ class BookNow extends Component {
   render() {
     return (
       <div className="book-now-container">
-        <ConfirmModal visible={this.state.visible} />
+        <ConfirmModal
+          visible={this.state.visible}
+          name={this.state.name}
+          dIssue={this.state.dIssue}
+          dReturn={this.state.dReturn}
+        />
         <div className="book-details ">
           <Grid>
             <h1>Booking Details</h1>

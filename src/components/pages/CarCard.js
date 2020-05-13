@@ -23,9 +23,6 @@ class CarCard extends Component {
   };
   render() {
     var { carData } = this.props;
-    if (JSON.parse(localStorage.getItem(carData.id) !== null)) {
-      carData.available = false;
-    }
 
     return (
       <Card className="car-card">
@@ -33,13 +30,7 @@ class CarCard extends Component {
           <Grid.Column mobile={16} tablet={3} computer={4}>
             <Image src={carData.image} className="card-car-img" />
           </Grid.Column>
-          <Grid.Column
-           
-            mobile={9}
-            tablet={5}
-            computer={4}
-            className="card-name"
-          >
+          <Grid.Column mobile={9} tablet={5} computer={4} className="card-name">
             <h4 className="card-car-name">{carData.name}</h4>
             <Grid.Row>
               <div className="card-car-color">
@@ -53,7 +44,6 @@ class CarCard extends Component {
             </Grid.Row>
           </Grid.Column>
           <Grid.Column
-           
             mobile={5}
             tablet={2}
             computer={2}
@@ -63,7 +53,6 @@ class CarCard extends Component {
             {carData.rent}
           </Grid.Column>
           <Grid.Column
-           
             mobile={8}
             tablet={2}
             computer={3}
@@ -75,7 +64,7 @@ class CarCard extends Component {
               disabled={!carData.available}
               onClick={this.handleOnClick}
               as={Link}
-              to="/book-now"
+              to={`/book-now/${carData._id}`}
             >
               Book Car
             </Button>
@@ -86,7 +75,6 @@ class CarCard extends Component {
             )}
           </Grid.Column>
           <Grid.Column
-           
             mobile={5}
             tablet={1}
             computer={2}
@@ -97,7 +85,7 @@ class CarCard extends Component {
                 className="details-btn"
                 onClick={this.handleOnClick}
                 as={Link}
-                to="/car-details"
+                to={`/car-details/${carData._id}`}
               >
                 Details
               </Button>

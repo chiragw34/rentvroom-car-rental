@@ -10,6 +10,7 @@ import {
   Divider,
 } from "semantic-ui-react";
 import { Link } from "react-router-dom";
+import axios from 'axios'
 
 // Components
 import Navbar from "../components/layout/Navbar";
@@ -33,25 +34,25 @@ class CarDetails extends Component {
   };
 
   componentDidMount() {
-    var data;
-    var selectedCar = JSON.parse(localStorage.getItem("selectedCar"));
+    const carId = this.props.match.params.carId;
+    axios.get(`/cars/${carId}`).then(res => {
+      // console.log(res.data.car);
+      this.setState({
+        carData: res.data.car,
+        loading: false,
+      });
+    })
 
-    if (selectedCar === null) {
-      data = this.props.data.selectedCar;
-    } else {
-      data = JSON.parse(localStorage.getItem("selectedCar"));
-    }
+    
+    var selectedCar = JSON.parse(localStorage.getItem("selectedCar"));
 
     if (localStorage.getItem(selectedCar.id) !== null) {
       this.setState({
         booked: true,
       });
-      console.log(this.state.carData);
+      
     }
-    this.setState({
-      carData: data,
-      loading: false,
-    });
+ 
   }
 
   render() {
@@ -90,12 +91,12 @@ class CarDetails extends Component {
                 </p>
               </div>
               <div className="sub-details-3">
-                <Button
-                  primary
-                  className="book-btn"
-                  disabled={!carData.available}
-                  as={Link}
-                  to="/book-now"
+                  <Button
+                    primary
+                    className="book-btn"
+                    disabled={!carData.available}
+                    as={Link}
+                    to={`/book-now/${carData._id}`}
                 >
                   Book Now
                 </Button>
@@ -124,7 +125,7 @@ class CarDetails extends Component {
         )}
         <p>Vehicle Number: {carData.vehicle_no}</p>
         <p>{carData.description}</p>
-        {this.state.booked && <CurrentBookings id={carData.id} />}
+        {carData.current_booking && <CurrentBookings data={carData.current_booking} id={carData._id} />}
       </div>
     );
     return (
